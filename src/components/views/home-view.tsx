@@ -223,17 +223,6 @@ export function HomeView() {
           >
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
-          {/* Dark overlay gradients for text legibility (top + bottom) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/60 to-background/95" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/20 to-transparent" />
-          {/* Subtle vignette for cinematic depth */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, transparent 40%, rgba(10,10,18,0.55) 100%)",
-            }}
-          />
         </div>
 
         {/* Hero content over the video */}
@@ -292,83 +281,83 @@ export function HomeView() {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* ===== SEARCH BAR (glass, overlapping hero bottom) ===== */}
-        <div className="relative z-20 -mt-14 md:-mt-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <Card className="glass p-4 md:p-6 shadow-2xl">
-              <form
-                onSubmit={submitSearch}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto_auto_auto] gap-3 md:gap-4 items-end"
+      {/* ===== SEARCH / FILTER BAR (just below hero) ===== */}
+      <section className="relative z-10 -mt-10 md:-mt-14">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <Card className="glass p-4 md:p-6 shadow-2xl">
+            <form
+              onSubmit={submitSearch}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto_auto_auto] gap-3 md:gap-4 items-end"
+            >
+              <div className="space-y-1.5">
+                <Label htmlFor="hero-city" className="text-xs text-muted-foreground">
+                  City
+                </Label>
+                <Select value={city} onValueChange={setCity}>
+                  <SelectTrigger id="hero-city" className="w-full h-11" aria-label="Select city">
+                    <SelectValue placeholder="Select city" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PAKISTAN_CITIES.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="hero-type" className="text-xs text-muted-foreground">
+                  Car Type
+                </Label>
+                <Select value={type} onValueChange={setType}>
+                  <SelectTrigger id="hero-type" className="w-full h-11" aria-label="Select car type">
+                    <SelectValue placeholder="Select type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CAR_TYPES.map((t) => (
+                      <SelectItem key={t} value={t}>
+                        {t}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex items-center gap-2 h-11 px-3 rounded-md border border-border bg-background/40">
+                <Switch
+                  id="hero-driver"
+                  checked={withDriver}
+                  onCheckedChange={setWithDriver}
+                  aria-label="With driver toggle"
+                />
+                <Label htmlFor="hero-driver" className="text-sm cursor-pointer">
+                  With Driver
+                </Label>
+              </div>
+
+              <Button
+                type="submit"
+                size="lg"
+                className="h-11 px-6 bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
               >
-                <div className="space-y-1.5">
-                  <Label htmlFor="hero-city" className="text-xs text-muted-foreground">
-                    City
-                  </Label>
-                  <Select value={city} onValueChange={setCity}>
-                    <SelectTrigger id="hero-city" className="w-full h-11" aria-label="Select city">
-                      <SelectValue placeholder="Select city" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {PAKISTAN_CITIES.map((c) => (
-                        <SelectItem key={c} value={c}>
-                          {c}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <Search className="w-4 h-4" /> Search
+              </Button>
 
-                <div className="space-y-1.5">
-                  <Label htmlFor="hero-type" className="text-xs text-muted-foreground">
-                    Car Type
-                  </Label>
-                  <Select value={type} onValueChange={setType}>
-                    <SelectTrigger id="hero-type" className="w-full h-11" aria-label="Select car type">
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CAR_TYPES.map((t) => (
-                        <SelectItem key={t} value={t}>
-                          {t}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex items-center gap-2 h-11 px-3 rounded-md border border-border bg-background/40">
-                  <Switch
-                    id="hero-driver"
-                    checked={withDriver}
-                    onCheckedChange={setWithDriver}
-                    aria-label="With driver toggle"
-                  />
-                  <Label htmlFor="hero-driver" className="text-sm cursor-pointer">
-                    With Driver
-                  </Label>
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="h-11 px-6 bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
-                >
-                  <Search className="w-4 h-4" /> Search
-                </Button>
-
-                <Button
-                  type="button"
-                  size="lg"
-                  variant="outline"
-                  className="h-11 px-6"
-                  onClick={() => setView("cars")}
-                >
-                  All Filters
-                </Button>
-              </form>
-            </Card>
-          </div>
+              <Button
+                type="button"
+                size="lg"
+                variant="outline"
+                className="h-11 px-6"
+                onClick={() => setView("cars")}
+              >
+                All Filters
+              </Button>
+            </form>
+          </Card>
         </div>
       </section>
 

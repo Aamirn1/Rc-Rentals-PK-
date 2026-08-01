@@ -193,3 +193,22 @@ Stage Summary:
 - Attached video now powers a professional full-bleed cinematic hero background
 - Video re-encoded from 24.5MB→1.6MB (15x smaller) and verified playing smoothly with no hanging
 - three.js no longer loaded on home page (faster initial load)
+
+---
+Task ID: 14
+Agent: Main (Z.ai Code)
+Task: Remove black shadow from hero video + move filter section below hero
+
+Work Log:
+- Removed all 3 dark overlay layers from the hero video background:
+  * bg-gradient-to-b (top→bottom dark gradient)
+  * bg-gradient-to-r (left→right dark gradient)
+  * radial vignette
+  The video now displays clean and full-bright with no shadow darkening it.
+- Moved the filter/search bar (City, Car Type, With Driver, Search, All Filters) OUT of the hero <section> and placed it as its own standalone <section> just below the hero, with a small -mt-10/-mt-14 overlap so it bridges the hero and the content below.
+- Kept the white hero text with drop-shadow-lg for legibility without darkening the video.
+- Verified via Agent Browser: 0 sibling overlays over the video element; hero section has video but no selects; the new section below has the selects and no video. All filter controls present and functional. No errors.
+
+Stage Summary:
+- Hero video now plays clean with no black shadow/overlays
+- Filter section (City/Car Type/With Driver/Search/All Filters) moved to just below the hero as a separate section
