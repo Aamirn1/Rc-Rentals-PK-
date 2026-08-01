@@ -134,16 +134,80 @@ const CARS: SeedCar[] = [
     description: "Built for the hills. The Toyota Fortuner Legender is a 7-seater diesel SUV that handles Murree's winding roads and snowy winters with confidence and comfort.",
     rating: 4.7,
   },
+  {
+    brand: "Honda", model: "Civic 2026", type: "Sedan", transmission: "Automatic", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 14000, withDriver: false, city: "Islamabad",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/84d5ec5c941f.jpg", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d838161cd225.jpg"],
+    features: ["Air Conditioning", "Sunroof", "Cruise Control", "Leather Seats", "Push Start", "Reverse Camera", "Apple CarPlay"],
+    description: "The all-new 2026 Honda Civic — bold redesign, turbo-charged performance, and a premium tech-loaded cabin. The latest model for those who want to drive the newest Civic in Islamabad.",
+    rating: 4.9,
+  },
+  {
+    brand: "Honda", model: "Civic 2025", type: "Sedan", transmission: "Automatic", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 13000, withDriver: false, city: "Lahore",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d838161cd225.jpg", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/84d5ec5c941f.jpg"],
+    features: ["Air Conditioning", "Sunroof", "Cruise Control", "Leather Seats", "Push Start", "Reverse Camera"],
+    description: "The 2025 Honda Civic — sporty styling, refined ride, and Honda's legendary reliability. A favourite for business and leisure travel across Lahore.",
+    rating: 4.8,
+  },
+  {
+    brand: "Toyota", model: "Corolla 2026", type: "Sedan", transmission: "Automatic", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 10000, withDriver: false, city: "Islamabad",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ef95d2ccbd9d.png", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a84e46ca2a7a.jpg"],
+    features: ["Air Conditioning", "Power Steering", "Airbags", "Bluetooth", "USB Charging", "ABS", "Reverse Camera"],
+    description: "The brand-new 2026 Toyota Corolla — fresh design, enhanced fuel efficiency, and the latest safety tech. Pakistan's most trusted sedan, now in its newest avatar.",
+    rating: 4.7,
+  },
+  {
+    brand: "Toyota", model: "Corolla 2025", type: "Sedan", transmission: "Automatic", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 9500, withDriver: false, city: "Karachi",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a84e46ca2a7a.jpg", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ef95d2ccbd9d.png"],
+    features: ["Air Conditioning", "Power Steering", "Airbags", "Bluetooth", "USB Charging", "ABS"],
+    description: "The 2025 Toyota Corolla — a comfortable, efficient, and dependable sedan perfect for daily commutes and intercity travel in Karachi.",
+    rating: 4.6,
+  },
+  {
+    brand: "Suzuki", model: "Alto 2025", type: "Hatchback", transmission: "Manual", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 4800, withDriver: false, city: "Lahore",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ffc819bd7bb6.jpg", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7b021f77adad.jpg"],
+    features: ["Air Conditioning", "Power Steering", "Airbags", "USB Charging", "Power Windows"],
+    description: "The 2025 Suzuki Alto — the most economical ride in our fleet. Compact, incredibly fuel-efficient, and easy to park. Perfect for navigating Lahore's busy streets on a budget.",
+    rating: 4.4,
+  },
+  {
+    brand: "Suzuki", model: "Cultus Grande", type: "Hatchback", transmission: "Automatic", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 6500, withDriver: false, city: "Multan",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/580fddac0475.jpg", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/17a763a939e9.jpeg"],
+    features: ["Air Conditioning", "Power Steering", "Airbags", "Power Windows", "ABS", "Multimedia Screen"],
+    description: "The Suzuki Cultus Grande — a spacious and refined hatchback with automatic transmission. Great value for families travelling around Multan and southern Punjab.",
+    rating: 4.4,
+  },
+  {
+    brand: "Toyota", model: "Yaris", type: "Sedan", transmission: "Automatic", fuel: "Petrol",
+    seats: 5, doors: 4, pricePerDay: 7500, withDriver: false, city: "Rawalpindi",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7b398f99f848.png", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7bf3be0a9839.jpg"],
+    features: ["Air Conditioning", "Power Steering", "Airbags", "Bluetooth", "USB Charging", "ABS", "Reverse Camera"],
+    description: "The Toyota Yaris — a stylish, fuel-efficient sedan that bridges the gap between compact and mid-size. Ideal for daily use and trips around Rawalpindi and Islamabad.",
+    rating: 4.5,
+  },
+  {
+    brand: "Toyota", model: "Land Cruiser Prado", type: "SUV", transmission: "Automatic", fuel: "Diesel",
+    seats: 7, doors: 5, pricePerDay: 28000, withDriver: true, city: "Islamabad",
+    images: ["https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2401d811972e.jpg", "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6873d4f8a0ea.jpeg"],
+    features: ["4x4 Drive", "Air Conditioning", "Leather Seats", "Sunroof", "GPS Navigation", "Reverse Camera", "7 Seater", "Cruise Control"],
+    description: "The Toyota Land Cruiser Prado — legendary off-road capability meets premium luxury. A 7-seater diesel SUV with a professional driver, perfect for northern areas trips and family tours from Islamabad.",
+    rating: 4.9,
+  },
 ];
 
 const CITIES = [
-  { name: "Islamabad", description: "The capital city — rent a car for Margalla Hills, Faisal Mosque, and Daman-e-Koh.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69635da5da0f.jpg" },
-  { name: "Rawalpindi", description: "Twin city to Islamabad — gateway to the northern areas and Murree.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6aab7bd96d58.jpg" },
-  { name: "Lahore", description: "The cultural heart of Pakistan — explore Badshahi Mosque, Lahore Fort, and Food Street.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6aab7bd96d58.jpg" },
-  { name: "Karachi", description: "The city of lights — beach drives, Clifton, and the bustling metropolis.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69635da5da0f.jpg" },
-  { name: "Peshawar", description: "Gateway to KPK — historic Qissa Khwani Bazaar and the Khyber Pass.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6aab7bd96d58.jpg" },
-  { name: "Multan", description: "City of Saints — shrines, mangoes, and southern Punjab hospitality.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69635da5da0f.jpg" },
-  { name: "Murree", description: "Hill station getaway — pine forests, cool weather, and scenic mountain roads.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69635da5da0f.jpg" },
+  { name: "Islamabad", description: "The capital city — rent a car for Margalla Hills, Faisal Mosque, and Daman-e-Koh.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6a5f19af431c.jpg" },
+  { name: "Rawalpindi", description: "Twin city to Islamabad — gateway to the northern areas and Murree.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/65fc0fac4172.jpeg" },
+  { name: "Lahore", description: "The cultural heart of Pakistan — explore Badshahi Mosque, Lahore Fort, and Food Street.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/104618110722.jpg" },
+  { name: "Karachi", description: "The city of lights — beach drives, Clifton, and the bustling metropolis.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/420eb9dce9a2.jpg" },
+  { name: "Peshawar", description: "Gateway to KPK — historic Qissa Khwani Bazaar and the Khyber Pass.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a2170c91adb1.jpg" },
+  { name: "Multan", description: "City of Saints — shrines, mangoes, and southern Punjab hospitality.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/41666e9c987e.jpg" },
+  { name: "Murree", description: "Hill station getaway — pine forests, cool weather, and scenic mountain roads.", image: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/72e07aa4c6f5.jpeg" },
 ];
 
 export async function runSeed() {
@@ -176,15 +240,22 @@ export async function runSeed() {
     });
   }
 
-  // Cities
+  // Cities (update image + description on every seed)
   for (const c of CITIES) {
-    await db.city.upsert({ where: { name: c.name }, update: {}, create: c });
+    await db.city.upsert({
+      where: { name: c.name },
+      update: { image: c.image, description: c.description },
+      create: c,
+    });
   }
 
-  // Cars (reset)
-  const carCount = await db.vehicle.count();
-  if (carCount === 0) {
-    for (const c of CARS) {
+  // Cars (upsert by brand+model — adds new models, keeps existing)
+  let addedCars = 0;
+  for (const c of CARS) {
+    const existing = await db.vehicle.findFirst({
+      where: { brand: c.brand, model: c.model },
+    });
+    if (!existing) {
       await db.vehicle.create({
         data: {
           brand: c.brand,
@@ -204,8 +275,9 @@ export async function runSeed() {
           available: true,
         },
       });
+      addedCars++;
     }
   }
 
-  return { admin: ADMIN_EMAIL, cars: CARS.length, cities: CITIES.length };
+  return { admin: ADMIN_EMAIL, cars: CARS.length, addedCars, cities: CITIES.length };
 }

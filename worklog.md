@@ -212,3 +212,23 @@ Work Log:
 Stage Summary:
 - Hero video now plays clean with no black shadow/overlays
 - Filter section (City/Car Type/With Driver/Search/All Filters) moved to just below the hero as a separate section
+
+---
+Task ID: 15
+Agent: Main (Z.ai Code)
+Task: Remove WhatsApp message bubble, update city photos, add new 2025/2026 cars
+
+Work Log:
+- WhatsApp button: removed the "Need help? Chat with us!" message bubble + "Open WhatsApp" link + close button entirely. Kept only the floating WhatsApp icon (bottom-right, glow animation, red notification dot). Removed the useState/useEffect/auto-open logic.
+- Searched and downloaded correct unique landmark images for all 7 cities (Islamabad/Faisal Mosque, Lahore/Badshahi Mosque, Karachi/sea view, Peshawar, Multan/shrines, Murree/hill station, Rawalpindi).
+- Updated CITIES array in seed-data.ts with the correct per-city image URLs.
+- Changed city upsert to update image+description on every seed (was `update: {}`).
+- Added 8 new 2025/2026 model cars to the CARS array: Honda Civic 2026, Honda Civic 2025, Toyota Corolla 2026, Toyota Corolla 2025, Suzuki Alto 2025, Suzuki Cultus Grande, Toyota Yaris, Toyota Land Cruiser Prado.
+- Changed car seed logic from "only if count==0" to upsert-by-brand+model (findFirst by brand+model, create if missing) so new models get added while existing cars/bookings are preserved.
+- Re-ran POST /api/seed: 8 new cars added, total fleet now 22 cars, all 7 cities updated with correct images.
+- Agent Browser verified: 0 message bubbles, WhatsApp icon present, 6 featured cars on home are the newest models (Prado, Yaris, Cultus Grande, Alto 2025, Corolla 2025, Corolla 2026), each city card shows a unique correct image.
+
+Stage Summary:
+- WhatsApp: clean floating icon only, no message popup
+- Cities: 7 unique correct landmark photos (was 2 repeated images)
+- Fleet: 22 cars including new 2025/2026 Honda Civic, Corolla, Alto, Cultus Grande, Yaris, Prado (plus existing Fortuner & V8)
