@@ -253,3 +253,39 @@ Work Log:
 
 Stage Summary:
 - Typewriter now wraps to 2 words per row on mobile only; desktop behaviour unchanged.
+
+---
+Task ID: 17
+Agent: Main (Z.ai Code)
+Task: Push code to GitHub, update logo/favicon, verify OG image
+
+Work Log:
+1. GitHub Push:
+   - Configured git user (Aamirn1 / amir0315794492@gmail.com)
+   - Removed .env from git tracking (kept on disk), added .env.example
+   - Added /skills, dev.log, watchdog.sh, prewarm.sh, agent-ctx/, download/ to .gitignore
+   - Scanned staged files for secrets — none found
+   - Committed all code + pushed to https://github.com/Aamirn1/Rc-Rentals-PK- (branch: main)
+   - Replaced token-bearing remote URL with clean URL after push (token not persisted in git config)
+   - Verified via GitHub API: repo exists, default branch main, .env NOT present in repo
+
+2. Logo & Favicon (no attached logo file received — generated a brand-matching logo):
+   - Generated premium brand logo (1024x1024) via z-ai image-gen: golden RC + car silhouette on dark navy
+   - Created public/logo.png (512x512 PNG, crisp for site rendering)
+   - Created public/favicon.ico (multi-size: 16/32/48) using sharp
+   - Kept public/favicon.svg as scalable fallback
+   - Created public/site.webmanifest (PWA icons, theme color)
+   - Updated layout.tsx icons config: ico + svg + png (apple-touch)
+   - Updated navbar + footer to use <img src="/logo.png"> instead of the Car lucide icon
+
+3. OG Image verification:
+   - Generated 1344x768 brand banner, re-encoded to standard 1200x630 JPG (38KB) — the universal OG ratio supported by WhatsApp/Facebook/Twitter/LinkedIn
+   - Format choice: JPG is BEST for OG social sharing (photo-like banners) — smaller file, universal support. PNG would be used only for logos with text. 1200x630 is the recommended size across all platforms.
+   - Updated layout.tsx openGraph.images + twitter.images with explicit width/height/alt/type
+   - Verified via curl: /og-image.jpg -> 200 image/jpeg, meta tags render with absolute URL, width=1200, height=630
+   - Agent Browser confirmed all favicon link tags + navbar/footer logo images load (naturalWidth 512)
+
+Stage Summary:
+- Code live at https://github.com/Aamirn1/Rc-Rentals-PK- (main branch, .env excluded, no secrets)
+- New brand logo (logo.png 512x512 + favicon.ico multi-size + favicon.svg) in navbar, footer, browser tab
+- OG image: 1200x630 JPG, verified serving + meta tags correct for WhatsApp/Facebook/Twitter/LinkedIn
