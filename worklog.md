@@ -232,3 +232,24 @@ Stage Summary:
 - WhatsApp: clean floating icon only, no message popup
 - Cities: 7 unique correct landmark photos (was 2 repeated images)
 - Fleet: 22 cars including new 2025/2026 Honda Civic, Corolla, Alto, Cultus Grande, Yaris, Prado (plus existing Fortuner & V8)
+
+---
+Task ID: 16
+Agent: Main (Z.ai Code)
+Task: Mobile-only typewriter wrapping to 2 words per row
+
+Work Log:
+- Rewrote typewriter.tsx to wrap typed text to exactly 2 words per row on mobile only:
+  * Split the typed substring into word tokens
+  * Each word rendered in a span; a <br/> is inserted after every 2nd word on mobile (sm:hidden) while desktop keeps words inline with non-breaking spaces (hidden sm:inline)
+  * Outer visible span: removed global whitespace-nowrap, applied sm:whitespace-nowrap so desktop keeps single-line behaviour, mobile allows wrapping
+  * Mobile spacer block reserves vertical space using the longest phrase wrapped 2-words-per-line (block spans) so layout doesn't jump as text types/deletes
+  * Desktop spacer unchanged (hidden sm:inline, whitespace-nowrap, longest phrase)
+- Did NOT touch anything else (hero, video, filters, cars, colors all unchanged).
+- Verified with Agent Browser:
+  * Mobile 390px: phrases wrap 2-words-per-row (e.g. "Self-Drive or / Chauffeur", "Drive Anywhere / in Pakistan"), estLines=2, brCount=1, width 358px within 390px viewport, no overflow
+  * Desktop 1280px: single-line nowrap preserved (sm:whitespace-nowrap active), no overflow
+  * No console/page errors
+
+Stage Summary:
+- Typewriter now wraps to 2 words per row on mobile only; desktop behaviour unchanged.
