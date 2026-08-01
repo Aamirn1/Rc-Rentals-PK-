@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
-import { Users, Fuel, Cog, MapPin, Star, Zap } from "lucide-react";
+import { Users, Fuel, Cog, MapPin, Star, Zap, Car } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CarCardProps {
@@ -28,14 +28,18 @@ export function CarCard({ car, className }: CarCardProps) {
   return (
     <ScrollReveal as="article" className={cn("h-full", className)}>
     <Card className={cn("card-lift overflow-hidden group bg-card border-border flex flex-col h-full", className)}>
-      <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+      <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-muted to-muted/40 grid place-items-center">
+        {/* Placeholder shown behind the image (visible while loading or if it fails) */}
+        <Car className="absolute w-12 h-12 text-primary/25" aria-hidden="true" />
         <img
           src={img}
           alt={`${v.brand} ${v.model} rental car in ${v.city}`}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="relative w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          referrerPolicy="no-referrer"
           onError={(e) => {
-            (e.currentTarget as HTMLImageElement).src = "/favicon.svg";
+            const t = e.currentTarget as HTMLImageElement;
+            t.style.display = "none";
           }}
         />
         <div className="absolute top-3 left-3 flex gap-2">

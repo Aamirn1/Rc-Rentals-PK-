@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useAppStore } from "@/lib/store";
-import { ShimmerLogo } from "@/components/effects/shimmer-logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, LogOut, LayoutDashboard, User as UserIcon } from "lucide-react";
@@ -46,7 +45,6 @@ export function Navbar() {
             alt="Rajpoot Cars Rentals PK logo"
             className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-110"
           />
-          <ShimmerLogo className="text-base sm:text-lg" />
         </button>
 
         {/* Desktop nav */}
@@ -108,7 +106,11 @@ export function Navbar() {
           <SheetContent side="right" className="w-[280px] bg-card border-l-border p-0 flex flex-col">
             {/* Header: logo only — the built-in SheetContent close (top-right X) handles closing (removed duplicate custom X) */}
             <div className="flex items-center justify-center py-5 px-4 border-b border-border">
-              <ShimmerLogo className="text-base" />
+              <img
+                src="/logo.png"
+                alt="Rajpoot Cars Rentals PK logo"
+                className="h-12 w-auto object-contain"
+              />
             </div>
 
             {/* Middle: nav links (and authed actions) */}

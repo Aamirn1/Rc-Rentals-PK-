@@ -488,14 +488,16 @@ export function HomeView() {
                 aria-label={`Rent a car in ${c.name}`}
               >
                 <Card className="card-lift overflow-hidden bg-card border-border h-full">
-                  <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-muted to-muted/40 grid place-items-center">
+                    <MapPin className="absolute w-12 h-12 text-primary/25" aria-hidden="true" />
                     <img
                       src={c.image || "/favicon.svg"}
                       alt={`Rent a car in ${c.name}, Pakistan`}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="relative w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
                       onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = "/favicon.svg";
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
