@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ShieldCheck,
   Wallet,
@@ -135,6 +135,34 @@ interface CityData {
 export function HomeView() {
   const { setView, setFilters, filters } = useAppStore();
 
+  // Hero video ref — smooth seamless loop (avoid the pause/stutter when the
+  // native `loop` attribute re-seeks to 0). We seek back to 0 ~120ms before
+  // the end so playback is continuous and gap-free.
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+    const onTimeUpdate = () => {
+      // If within the last ~4 frames of the end, jump back to start
+      if (v.duration > 0 && v.currentTime > v.duration - 0.13) {
+        v.currentTime = 0;
+      }
+    };
+    const onLoaded = () => {
+      // Ensure playback starts and stays smooth
+      v.playbackRate = 1;
+      v.play().catch(() => {});
+    };
+    v.addEventListener("timeupdate", onTimeUpdate);
+    v.addEventListener("loadeddata", onLoaded);
+    // Try to play immediately (some browsers need a nudge)
+    v.play().catch(() => {});
+    return () => {
+      v.removeEventListener("timeupdate", onTimeUpdate);
+      v.removeEventListener("loadeddata", onLoaded);
+    };
+  }, []);
+
   // Search bar local state (synced from store so other views can pre-fill)
   const [city, setCity] = useState(filters.city);
   const [type, setType] = useState(filters.type);
@@ -212,7 +240,8 @@ export function HomeView() {
         {/* Video background — full-bleed, muted, looping, optimized for smooth playback */}
         <div className="absolute inset-0 z-0">
           <video
-            className="w-full h-full object-cover"
+            ref={heroVideoRef}
+            className="w-full h-full object-cover object-[position:75%_center] sm:object-center"
             autoPlay
             muted
             loop
