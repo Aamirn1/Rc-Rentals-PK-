@@ -407,3 +407,26 @@ Work Log:
 Stage Summary:
 - Hero "Rent Your Dream Car" — all 3 lines golden
 - Car & city card images now hosted locally (no CDN dependency) — will render reliably in all environments
+
+---
+Task ID: 22
+Agent: Main (Z.ai Code)
+Task: Fix featured cars & popular cities images not visible
+
+Work Log:
+- Diagnosis: Images were loading correctly in headless browser (VLM confirmed visible), but user reported them missing in their preview. Root causes identified:
+  1. `loading="lazy"` on card images — in some preview iframes, the IntersectionObserver never fires, so lazy images never load
+  2. 2 image files (img23.jpg, img29.jpg) were actually PNG data with .jpg extensions — could fail in strict browsers
+  3. Browser had cached old 404 image URLs from a previous failed migration (dev.log showed 404s for stale paths)
+- Fixes applied:
+  1. Changed car card images (car-card.tsx) and city card images (home-view.tsx) from `loading="lazy"` to `loading="eager"` + `decoding="async"` — images now load immediately on page render regardless of scroll/IntersectionObserver
+  2. Re-encoded img23.jpg and img29.jpg as true JPEGs using sharp (verified: now "JPEG image data, baseline")
+  3. Verified all 51 DB image paths exist on disk (0 missing)
+- Verified via Agent Browser (after cookie clear + clean reload): featured cars 6/6 loaded (allLoaded:true), cities 7/7 loaded (allLoaded:true), no 404s in network requests
+- VLM-verified: "YES. The cards clearly display images of the vehicles" and "YES, each city card displays a prominent landmark image"
+- Committed (7dfb4d0) + pushed to GitHub
+
+Stage Summary:
+- Card images now load eagerly (no lazy-load dependency) — will render reliably in all preview environments
+- All image files are properly encoded JPEGs
+- Featured cars & Popular Cities images confirmed visible
