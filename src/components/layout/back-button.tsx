@@ -43,8 +43,8 @@ export function BackButton() {
     }
   }, [view]);
 
-  // Hidden on home (no back target)
-  if (view === "home") return null;
+  // Hidden on home (no back target) and on car-details (has its own "Back to all cars" button)
+  if (view === "home" || view === "car-details") return null;
 
   const handleBack = () => {
     const hist = historyRef.current;

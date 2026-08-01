@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RC Rentals PK – Premium Car Rental in Pakistan | Islamabad, Lahore, Karachi",
+  title: "Rajpoot Cars Rentals PK – Premium Car Rental in Pakistan | Islamabad, Lahore, Karachi",
   description:
-    "RC Rentals PK offers affordable self-drive and chauffeur car rentals across Pakistan. Book SUVs, sedans, luxury cars and vans in Islamabad, Lahore, Karachi & more. Rent a car for trips, tours, weddings and events.",
+    "Rajpoot Cars Rentals PK offers affordable self-drive and chauffeur car rentals across Pakistan. Book SUVs, sedans, luxury cars and vans in Islamabad, Lahore, Karachi & more. Rent a car for trips, tours, weddings and events.",
   keywords: [
     "rent a car Islamabad",
     "car rental Lahore",
@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     "wedding car hire Islamabad",
     "SUV rental Pakistan",
     "chauffeur drive Pakistan",
-    "RC Rentals PK",
+    "Rajpoot Cars Rentals PK",
   ],
-  authors: [{ name: "RC Rentals PK" }],
-  metadataBase: new URL("https://rc-rentals-pk.vercel.app"),
+  authors: [{ name: "Rajpoot Cars Rentals PK" }],
+  metadataBase: new URL("https://rajpootcarrentalspk.vercel.app"),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -40,28 +40,29 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "RC Rentals PK – Premium Car Rental in Pakistan",
+    title: "Rajpoot Cars Rentals PK – Premium Car Rental in Pakistan",
     description:
       "Affordable self-drive & chauffeur car rentals across Pakistan. Book SUVs, sedans, luxury cars & vans for trips, tours, weddings and events.",
-    url: "https://rc-rentals-pk.vercel.app",
-    siteName: "RC Rentals PK",
+    url: "https://rajpootcarrentalspk.vercel.app",
+    siteName: "Rajpoot Cars Rentals PK",
     type: "website",
     locale: "en_PK",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://rajpootcarrentalspk.vercel.app/og-image.jpg",
+        secureUrl: "https://rajpootcarrentalspk.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "RC Rentals PK – Premium Car Rental in Pakistan",
+        alt: "Rajpoot Cars Rentals PK – Premium Car Rental in Pakistan",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RC Rentals PK – Premium Car Rental in Pakistan",
+    title: "Rajpoot Cars Rentals PK – Premium Car Rental in Pakistan",
     description: "Affordable self-drive & chauffeur car rentals across Pakistan.",
-    images: ["/og-image.jpg"],
+    images: ["https://rajpootcarrentalspk.vercel.app/og-image.jpg"],
   },
 };
 
