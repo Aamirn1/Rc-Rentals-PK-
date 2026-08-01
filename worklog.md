@@ -164,3 +164,32 @@ Stage Summary:
 - Dev server stable on port 3000 with watchdog
 - Zero lint errors, zero runtime errors in browser
 - Production-ready
+
+---
+Task ID: 13
+Agent: Main (Z.ai Code)
+Task: Replace 3D rotating image with attached video in hero section
+
+Work Log:
+- Analyzed uploaded video (upload/video_260801_143327.mp4): 1080p, 120fps, 30 Mbps, 24.5MB — far too heavy for web, would hang/slow-play
+- Re-encoded with ffmpeg to web-optimized settings: 720p, 30fps, 2 Mbps, 1.6MB (15x smaller), H.264 high profile, CRF 23, maxrate 2500k, -movflags +faststart (progressive download), -tune fastdecode (smooth playback), audio stripped (silent hero bg). Output: public/videos/hero-bg.mp4
+- Extracted poster frame (public/videos/hero-poster.jpg, 87KB) for instant display before video buffers
+- Rewrote home-view.tsx hero section:
+  * Removed dynamic import of Hero3DScene (three.js no longer loads on home page — big perf win)
+  * Removed the right-column 3D glass panel and "Powered by RC Rentals PK" category caption entirely
+  * New hero: full-bleed <video> background (object-cover, autoPlay/muted/loop/playsInline/preload=auto/poster) with layered dark gradient overlays (top-bottom + left-right + radial vignette) for text legibility
+  * Typewriter H1, tagline, CTAs, and trust badges now overlaid on the video in white with drop-shadows
+  * Search bar still overlaps the hero bottom (z-20)
+- Ran `bun run lint` → 0 errors
+- Agent Browser verification:
+  * Video element present, playing (paused:false, currentTime advancing in real-time 4.0s→5.78s, readyState:4, no seeking/stalling)
+  * 0 canvas elements (3D fully removed), 1 video element
+  * Hero H1 + typewriter + buttons visible over video
+  * No page errors, no console errors, THREE.Clock deprecation warning gone
+  * Featured cars section below renders normally
+
+Stage Summary:
+- 3D rotating alloy-wheel scene and its category caption fully removed from the hero
+- Attached video now powers a professional full-bleed cinematic hero background
+- Video re-encoded from 24.5MB→1.6MB (15x smaller) and verified playing smoothly with no hanging
+- three.js no longer loaded on home page (faster initial load)

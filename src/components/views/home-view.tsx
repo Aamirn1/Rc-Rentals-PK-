@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import {
   ShieldCheck,
   Wallet,
@@ -16,7 +15,6 @@ import {
   TrendingUp,
   MapPin,
   ChevronRight,
-  Loader2,
 } from "lucide-react";
 import { useAppStore, PAKISTAN_CITIES, CAR_TYPES } from "@/lib/store";
 import { toVehicleWithImages, formatPKR, type Vehicle } from "@/lib/vehicle-utils";
@@ -38,18 +36,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-
-const Hero3DScene = dynamic(
-  () => import("@/components/effects/hero-3d-scene").then((m) => m.Hero3DScene),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full grid place-items-center">
-        <Loader2 className="w-10 h-10 text-primary animate-spin" />
-      </div>
-    ),
-  }
-);
 
 const BRANDS = [
   "Toyota",
@@ -221,79 +207,94 @@ export function HomeView() {
 
   return (
     <div className="animate-fade-up">
-      {/* ===== HERO ===== */}
+      {/* ===== HERO with video background ===== */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-24 md:pt-16 md:pb-32">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            {/* Left */}
-            <div className="text-center lg:text-left">
-              <Badge variant="secondary" className="mb-5 gap-1 bg-primary/10 text-primary border-primary/20">
-                <Sparkles className="w-3 h-3" /> Pakistan&apos;s Premium Car Rental
-              </Badge>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-5">
-                <span className="block text-foreground">
-                  <Typewriter
-                    phrases={[
-                      "Rent Your Dream Car",
-                      "Drive Anywhere in Pakistan",
-                      "Self-Drive or Chauffeur",
-                      "Book in Minutes",
-                    ]}
-                  />
-                </span>
-              </h1>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8">
-                From economical hatchbacks to luxury sedans and SUVs — RC Rentals PK gives you the
-                keys to explore Pakistan. Self-drive or with a professional chauffeur, in 10+ cities.
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                <Button
-                  size="lg"
-                  onClick={() => setView("cars")}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-12 px-7"
-                >
-                  Browse Cars <ArrowRight className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => setView("cars")}
-                  className="h-12 px-7"
-                >
-                  Book Now
-                </Button>
-              </div>
+        {/* Video background — full-bleed, muted, looping, optimized for smooth playback */}
+        <div className="absolute inset-0 z-0">
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/videos/hero-poster.jpg"
+            aria-hidden="true"
+          >
+            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay gradients for text legibility (top + bottom) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/60 to-background/95" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/20 to-transparent" />
+          {/* Subtle vignette for cinematic depth */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, transparent 40%, rgba(10,10,18,0.55) 100%)",
+            }}
+          />
+        </div>
 
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-primary" /> Verified Drivers
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Wallet className="w-4 h-4 text-primary" /> Best Prices
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-primary" /> 24/7 Support
-                </span>
-              </div>
+        {/* Hero content over the video */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-28 md:pt-28 md:pb-36">
+          <div className="max-w-3xl">
+            <Badge
+              variant="secondary"
+              className="mb-5 gap-1 bg-primary/15 text-primary border-primary/30 backdrop-blur-sm"
+            >
+              <Sparkles className="w-3 h-3" /> Pakistan&apos;s Premium Car Rental
+            </Badge>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-white drop-shadow-lg">
+              <span className="block">
+                <Typewriter
+                  phrases={[
+                    "Rent Your Dream Car",
+                    "Drive Anywhere in Pakistan",
+                    "Self-Drive or Chauffeur",
+                    "Book in Minutes",
+                  ]}
+                />
+              </span>
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed mb-8 drop-shadow">
+              From economical hatchbacks to luxury sedans and SUVs — RC Rentals PK gives you the
+              keys to explore Pakistan. Self-drive or with a professional chauffeur, in 10+ cities.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                size="lg"
+                onClick={() => setView("cars")}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-12 px-8 text-base shadow-lg shadow-primary/30"
+              >
+                Browse Cars <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => setView("cars")}
+                className="h-12 px-8 text-base bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
+              >
+                Book Now
+              </Button>
             </div>
 
-            {/* Right — 3D scene */}
-            <div className="relative animate-float">
-              <div className="glass rounded-3xl p-4 sm:p-6 aspect-square max-w-md mx-auto relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
-                <div className="w-full h-full relative">
-                  <Hero3DScene />
-                </div>
-              </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 glass px-4 py-2 rounded-full text-xs text-muted-foreground flex items-center gap-2">
-                <Car className="w-3.5 h-3.5 text-primary" /> Powered by RC Rentals PK
-              </div>
+            <div className="mt-9 flex flex-wrap gap-x-7 gap-y-2 text-sm text-white/80">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-primary" /> Verified Drivers
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Wallet className="w-4 h-4 text-primary" /> Best Prices
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-primary" /> 24/7 Support
+              </span>
             </div>
           </div>
         </div>
 
         {/* ===== SEARCH BAR (glass, overlapping hero bottom) ===== */}
-        <div className="relative z-10 -mt-12 md:-mt-16">
+        <div className="relative z-20 -mt-14 md:-mt-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <Card className="glass p-4 md:p-6 shadow-2xl">
               <form
