@@ -1,0 +1,121 @@
+// RC Rentals PK - Prisma Schema
+// Car rental platform database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  phone        String?
+  passwordHash String
+  role         String   @default("CUSTOMER") // CUSTOMER | ADMIN
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bookings  Booking[]
+  reviews   Review[]
+  payments  Payment[]
+  messages  ContactMessage[]
+}
+
+model Vehicle {
+  id           String   @id @default(cuid())
+  brand        String
+  model        String
+  type         String   // Sedan | SUV | Hatchback | Luxury | Van | Coupe
+  transmission String   // Automatic | Manual
+  fuel         String   // Petrol | Diesel | Hybrid | Electric
+  seats        Int
+  doors        Int      @default(4)
+  pricePerDay  Float
+  withDriver   Boolean  @default(false)
+  city         String
+  images       String   // JSON array of image URLs
+  features     String   // JSON array of feature strings (AC, Bluetooth, GPS...)
+  description  String
+  available    Boolean  @default(true)
+  rating       Float    @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bookings Booking[]
+  reviews  Review[]
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  userId          String
+  vehicleId       String
+  startDate       String
+  endDate         String
+  withDriver      Boolean  @default(false)
+  pickupLocation  String
+  dropoffLocation String?
+  totalAmount     Float
+  status          String   @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED
+  customerName    String
+  customerPhone   String
+  customerEmail   String
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  payment   Payment?
+}
+
+model Payment {
+  id          String   @id @default(cuid())
+  bookingId   String   @unique
+  userId      String
+  amount      Float
+  method      String   // Cash | Card | JazzCash | Easypaisa | Bank Transfer
+  status      String   @default("PENDING") // PENDING | PAID | FAILED | REFUNDED
+  txnRef      String?
+  paymentDate DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  vehicleId String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+}
+
+model City {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  image       String?
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  userId    String?
+  status    String   @default("NEW") // NEW | READ | RESOLVED
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
