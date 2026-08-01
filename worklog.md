@@ -486,3 +486,29 @@ Stage Summary:
 - All Vercel blockers fixed: .env committed, vercel.json configured, DB copied to /tmp at runtime
 - After Vercel redeploys: Prisma connects to /tmp DB copy (writable) → cars/cities API returns data → cards render → images serve from /images/cars/*.jpg
 - The user should trigger a Vercel redeploy (push or manual) for these fixes to take effect
+
+---
+Task ID: 25
+Agent: Main (Z.ai Code)
+Task: Add back button on all pages + shine shimmer on hero text
+
+Work Log:
+1. Back button (src/components/layout/back-button.tsx):
+   - Created BackButton component: small circular ArrowLeft icon fixed to top-left (top-[68px] left-3), just below the navbar
+   - Uses a view-history stack (useRef) for genuine step-back navigation: tracks views as user navigates, pops on back click
+   - Falls back to a view navigation graph: cars->home, car-details->cars, booking->car-details, about/contact/login/signup/profile/admin->home
+   - Hidden on home page (returns null when view==='home')
+   - Glass styling with border, hover scale-110, primary color on hover, animate-fade-up entrance
+   - Added to page.tsx shell between Navbar and main
+   - Verified via Agent Browser: absent on home, present on Cars page (top:68,left:12), clicking returns to home, hidden again on home
+
+2. Hero shine shimmer:
+   - Changed hero H1 spans ('Rent Your' / 'Dream' / 'Car') from class 'text-gradient-gold' (static gradient) to 'shine-text' (animated)
+   - The shine-text CSS: metallic gold linear-gradient (110deg) with a bright highlight sweep, background-size 200%, -webkit-background-clip:text, animation: shine-sweep 5s linear infinite (moves background-position from 0 to -200%)
+   - VLM-verified: "text features a golden gradient effect... shimmering or radiant look... metallic appearance that resembles polished gold"
+
+3. Committed (0a29f32) + pushed to GitHub
+
+Stage Summary:
+- Back button: small circular arrow on top-left of every non-home page, genuine step-back navigation
+- Hero "Rent Your Dream Car": animated golden shine/shimmer sweep effect
