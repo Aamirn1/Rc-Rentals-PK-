@@ -59,3 +59,4 @@ watchdog.sh
 prewarm.sh
 agent-ctx/
 download/
+upload/

@@ -46,7 +46,7 @@ export function Navbar() {
             alt="RC Rentals PK logo"
             width={36}
             height={36}
-            className="w-9 h-9 rounded-lg object-cover transition-transform group-hover:scale-110"
+            className="w-9 h-9 rounded-lg object-contain transition-transform group-hover:scale-110"
           />
           <ShimmerLogo className="text-lg sm:text-xl" />
         </button>

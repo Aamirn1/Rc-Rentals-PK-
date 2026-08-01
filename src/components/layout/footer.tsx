@@ -30,7 +30,7 @@ export function Footer() {
                 alt="RC Rentals PK logo"
                 width={36}
                 height={36}
-                className="w-9 h-9 rounded-lg object-cover"
+                className="w-9 h-9 rounded-lg object-contain"
               />
               <ShimmerLogo className="text-lg" />
             </div>
