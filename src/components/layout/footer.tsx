@@ -25,9 +25,13 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-3">
-              <span className="grid place-items-center w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 text-primary">
-                <Car className="w-5 h-5" />
-              </span>
+              <img
+                src="/logo.png"
+                alt="RC Rentals PK logo"
+                width={36}
+                height={36}
+                className="w-9 h-9 rounded-lg object-cover"
+              />
               <ShimmerLogo className="text-lg" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">

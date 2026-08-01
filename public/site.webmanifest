@@ -1,0 +1,14 @@
+{
+  "name": "RC Rentals PK",
+  "short_name": "RC Rentals",
+  "description": "Premium Car Rental in Pakistan",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "theme_color": "#0a0a12",
+  "background_color": "#0a0a12",
+  "display": "standalone",
+  "start_url": "/"
+}

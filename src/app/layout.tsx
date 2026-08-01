@@ -30,8 +30,15 @@ export const metadata: Metadata = {
   authors: [{ name: "RC Rentals PK" }],
   metadataBase: new URL("https://rc-rentals-pk.vercel.app"),
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/logo.png", sizes: "512x512" }],
+    shortcut: ["/favicon.ico"],
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "RC Rentals PK – Premium Car Rental in Pakistan",
     description:
@@ -40,11 +47,21 @@ export const metadata: Metadata = {
     siteName: "RC Rentals PK",
     type: "website",
     locale: "en_PK",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "RC Rentals PK – Premium Car Rental in Pakistan",
+        type: "image/jpeg",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "RC Rentals PK – Premium Car Rental in Pakistan",
     description: "Affordable self-drive & chauffeur car rentals across Pakistan.",
+    images: ["/og-image.jpg"],
   },
 };
 

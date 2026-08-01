@@ -51,4 +51,11 @@ prompt
 
 server.log
 # Skills directory
-/skills/
+/skills/.env
+
+# skill bundles (local only)
+/skills
+watchdog.sh
+prewarm.sh
+agent-ctx/
+download/

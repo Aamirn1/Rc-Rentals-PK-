@@ -41,9 +41,13 @@ export function Navbar() {
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <button onClick={() => go("home")} className="flex items-center gap-2 group" aria-label="RC Rentals PK home">
-          <span className="grid place-items-center w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 text-primary transition-transform group-hover:scale-110">
-            <Car className="w-5 h-5" />
-          </span>
+          <img
+            src="/logo.png"
+            alt="RC Rentals PK logo"
+            width={36}
+            height={36}
+            className="w-9 h-9 rounded-lg object-cover transition-transform group-hover:scale-110"
+          />
           <ShimmerLogo className="text-lg sm:text-xl" />
         </button>
 
