@@ -357,3 +357,28 @@ Stage Summary:
 - Hero now shows stacked "Rent Your / Dream / Car"; typewriter rotates slogans below the search bar
 - Car cards glow + fade-up on scroll into view (IntersectionObserver)
 - Mobile menu: single X close, Login+Sign Up at bottom in one row
+
+---
+Task ID: 20
+Agent: Main (Z.ai Code)
+Task: Fix city/car card visibility + remove navbar text wordmark
+
+Work Log:
+1. Card visibility fix:
+   - Root cause: cards were rendering correctly in DOM (verified via Agent Browser: 6 car cards + 7 city cards present, images loaded from z-cdn). VLM analysis of screenshots confirmed cards WERE visible with real images. However, to make them robust against slow/blocked image loads, I added proper placeholders.
+   - Car cards (car-card.tsx): image container now has bg-gradient + a centered Car icon (text-primary/25) behind the image. On image error, the <img> hides (display:none) revealing the branded placeholder instead of swapping to favicon.svg. Added referrerPolicy="no-referrer".
+   - City cards (home-view.tsx): same treatment with a MapPin icon placeholder behind the image; onError hides the img.
+   - Verified via Agent Browser: after scroll, featured cars = 6 visible (5 loaded), cities = 7 visible (7 loaded).
+
+2. Navbar text removal:
+   - Removed the <ShimmerLogo> text wordmark ("Rajpoot Cars / Rentals PK") from the desktop navbar — only the logo <img> remains.
+   - Removed the unused ShimmerLogo import from navbar.tsx.
+   - Mobile menu header: replaced <ShimmerLogo> with the logo <img> for consistency (logo-only, no text).
+   - VLM confirmed: navbar now shows only the logo image; the "RENTALS .PK" text visible is part of the logo image itself, not separate DOM text.
+   - Did NOT touch any other navbar element (nav links, login/signup buttons, layout all unchanged).
+
+3. Committed (fea4d68) + pushed to GitHub.
+
+Stage Summary:
+- Car & city cards now have branded gradient placeholders with icons behind images — never look empty even while loading or if images fail.
+- Navbar: text wordmark removed, logo image only (mobile menu header too).
