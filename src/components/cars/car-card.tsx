@@ -34,7 +34,8 @@ export function CarCard({ car, className }: CarCardProps) {
         <img
           src={img}
           alt={`${v.brand} ${v.model} rental car in ${v.city}`}
-          loading="lazy"
+          loading="eager"
+          decoding="async"
           className="relative w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           referrerPolicy="no-referrer"
           onError={(e) => {
