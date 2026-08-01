@@ -512,3 +512,28 @@ Work Log:
 Stage Summary:
 - Back button: small circular arrow on top-left of every non-home page, genuine step-back navigation
 - Hero "Rent Your Dream Car": animated golden shine/shimmer sweep effect
+
+---
+Task ID: 26
+Agent: Main (Z.ai Code)
+Task: Mobile video shift to show car + smooth seamless loop
+
+Work Log:
+1. Mobile video position:
+   - Analyzed video frames with VLM: the car (black Range Rover SUV) is on the RIGHT side of the video frame
+   - On mobile, object-cover was cropping the right side, hiding the car
+   - Added object-[position:75%_center] for mobile (shows the right 75% point of the video where the car is)
+   - sm:object-center keeps desktop centered (unchanged) — mobile-only change as requested
+   - VLM-verified on mobile (390px): 'A black luxury SUV is visible in the hero section background. You can see its front grille, headlights, hood, and front wheel.'
+
+2. Smooth seamless loop:
+   - Root cause: the browser's native `loop` attribute re-seeks to 0 when the video ends, causing a brief pause/stutter
+   - Fix: added heroVideoRef + useEffect with a `timeupdate` event listener that seeks to currentTime=0 when the video is within ~130ms (4 frames at 30fps) of the end — BEFORE the native loop fires
+   - Also added `loadeddata` listener to set playbackRate=1 and ensure play() starts, plus an initial play() nudge
+   - Verified: playback advances smoothly across the loop boundary (t=3.83 -> 5.93 -> loops to 2.63 -> 3.52 -> 4.40, paused:false throughout, no pause)
+
+3. Committed (714ec43) + pushed to GitHub
+
+Stage Summary:
+- Mobile: video shifted right (75%) so the car is visible; desktop unchanged (centered)
+- Video loops seamlessly with no pause/stutter at the loop boundary
