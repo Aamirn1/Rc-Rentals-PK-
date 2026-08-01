@@ -430,3 +430,27 @@ Stage Summary:
 - Card images now load eagerly (no lazy-load dependency) — will render reliably in all preview environments
 - All image files are properly encoded JPEGs
 - Featured cars & Popular Cities images confirmed visible
+
+---
+Task ID: 23
+Agent: Main (Z.ai Code)
+Task: Fix Vercel-specific image visibility issue
+
+Work Log:
+- Root cause identified: next.config.ts had `output: "standalone"` which is designed for Docker/self-hosted deployments, NOT Vercel. On Vercel, standalone mode prevents the `public/` folder (including /images/cars/*.jpg) from being served correctly at the root URL — that's why images were missing on Vercel but worked locally.
+- Fixes applied:
+  1. Removed `output: "standalone"` from next.config.ts — Vercel builds natively and serves public/ files at root automatically.
+  2. Fixed package.json build script: removed the standalone copy commands (`cp -r .next/static .next/standalone...` and `cp -r public .next/standalone`) which are wrong for Vercel. Build is now `prisma generate && next build`. Added `vercel-build` script that runs `prisma db push` to sync schema at build time. Changed `start` to `next start`.
+  3. Changed DATABASE_URL from absolute path (`file:/home/z/my-project/db/custom.db`) to relative (`file:./db/custom.db`) so it resolves on any host.
+  4. Updated seed-data.ts: replaced all 51 CDN image URLs with local `/images/cars/img*.jpg` paths so seeding on Vercel populates local image paths.
+- Verified locally: home=200, images serve=200, cars API returns local image paths, lint passes.
+- GitHub repo verified: next.config.ts has no standalone, 40 image files present.
+- Committed (9bb8271) + pushed to GitHub.
+
+NOTE on Vercel + SQLite: Vercel's serverless filesystem is read-only at runtime, so SQLite writes (new bookings, logins) won't persist across invocations. The committed db/custom.db (with seeded cars/cities) is readable, so the site will display correctly. For persistent bookings in production, migrate to Vercel Postgres or an external DB.
+
+Stage Summary:
+- Vercel image issue fixed by removing output:standalone (the root cause)
+- Build scripts and DB path made Vercel-compatible
+- Seed data uses local image paths
+- After Vercel redeploys, Featured Vehicles and Popular Cities images will be visible
