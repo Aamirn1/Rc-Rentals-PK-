@@ -289,3 +289,30 @@ Stage Summary:
 - Code live at https://github.com/Aamirn1/Rc-Rentals-PK- (main branch, .env excluded, no secrets)
 - New brand logo (logo.png 512x512 + favicon.ico multi-size + favicon.svg) in navbar, footer, browser tab
 - OG image: 1200x630 JPG, verified serving + meta tags correct for WhatsApp/Facebook/Twitter/LinkedIn
+
+---
+Task ID: 18
+Agent: Main (Z.ai Code)
+Task: Replace logo & favicon with the exact uploaded brand photo
+
+Work Log:
+- Used the uploaded file /home/z/my-project/upload/ChatGPT Image Aug 1, 2026, 04_35_53 PM~2.jpg (1254x549 JPEG) as the single source for all brand icons
+- Deleted the previously AI-generated logo.png, favicon.ico, favicon.svg, og-image.jpg
+- Created via sharp from the exact uploaded photo:
+  * public/logo.png — 512x512 PNG (fit:contain on dark navy background), used in navbar & footer
+  * public/favicon.ico — multi-size 16/32/48 ICO for browser tabs
+  * public/favicon.svg — scalable SVG wrapper embedding the raster logo
+  * public/apple-touch-icon.png — 180x180 PNG for iOS home screen
+  * public/og-image.jpg — 1200x630 JPG (regenerated from the new logo on dark navy banner, 48KB) for WhatsApp/Facebook/Twitter/LinkedIn sharing
+- Updated layout.tsx: apple-touch-icon added to icons config
+- Updated site.webmanifest with all icon variants
+- Updated navbar.tsx & footer.tsx: object-cover → object-contain so the wide banner logo displays fully without cropping
+- Excluded /upload folder from the repo (.gitignore + git rm --cached)
+- Committed + pushed to GitHub (commit b20cfbd)
+- Verified via GitHub API: all 5 brand icon files present in repo public/, upload/ folder excluded (404)
+- Agent Browser verified: navbar logo (512x512 loaded:true), footer logo loaded, 5 favicon link tags registered, no errors
+
+Stage Summary:
+- Exact uploaded brand photo now used for logo.png, favicon.ico, favicon.svg, apple-touch-icon.png, and og-image.jpg
+- Previous AI-generated logo fully deleted
+- All changes pushed to https://github.com/Aamirn1/Rc-Rentals-PK-
