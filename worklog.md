@@ -454,3 +454,35 @@ Stage Summary:
 - Build scripts and DB path made Vercel-compatible
 - Seed data uses local image paths
 - After Vercel redeploys, Featured Vehicles and Popular Cities images will be visible
+
+---
+Task ID: 24
+Agent: Main (Z.ai Code)
+Task: Fix Vercel images - commit .env + /tmp DB copy for serverless
+
+Work Log:
+Root cause analysis (why images still not visible on Vercel after previous fixes):
+1. .env was gitignored (.env* pattern) so Vercel had NO DATABASE_URL env var → Prisma couldn't connect → cars/cities API returned empty → no cards → "images missing"
+2. Vercel's serverless filesystem is read-only at runtime. The committed db/custom.db deploys read-only, but Prisma SQLite needs write access for WAL/SHM journal files → "Unable to open database file" errors at runtime
+
+Fixes applied:
+1. .gitignore: changed '.env*' (ignore all env files) to only ignore local overrides (.env.local, .env.*.local). This allows .env itself to be committed.
+2. Committed .env with DATABASE_URL=file:./db/custom.db (non-secret SQLite path, relative so it resolves on Vercel)
+3. Committed .env.example as documentation
+4. Added vercel.json with explicit buildCommand: 'prisma generate && prisma db push --accept-data-loss && next build' — ensures schema sync at build time (writable)
+5. Rewrote src/lib/db.ts: on Vercel production (VERCEL + NODE_ENV=production env vars), copies db/custom.db to /tmp/custom.db (writable on Vercel serverless) on first access, then sets DATABASE_URL to the /tmp copy. In development, uses the original path directly.
+
+Verified on GitHub repo:
+- next.config.ts: no output:standalone ✓
+- .env: committed with DATABASE_URL ✓
+- vercel.json: buildCommand set ✓
+- db/custom.db: committed (with seeded data + local image paths) ✓
+- 40 image files in public/images/cars/ ✓
+- db.ts: Vercel /tmp copy logic present ✓
+
+Committed in 3 pushes: 39c23de (.env + vercel.json), a9825a5 (db.ts /tmp copy)
+
+Stage Summary:
+- All Vercel blockers fixed: .env committed, vercel.json configured, DB copied to /tmp at runtime
+- After Vercel redeploys: Prisma connects to /tmp DB copy (writable) → cars/cities API returns data → cards render → images serve from /images/cars/*.jpg
+- The user should trigger a Vercel redeploy (push or manual) for these fixes to take effect
