@@ -316,3 +316,44 @@ Stage Summary:
 - Exact uploaded brand photo now used for logo.png, favicon.ico, favicon.svg, apple-touch-icon.png, and og-image.jpg
 - Previous AI-generated logo fully deleted
 - All changes pushed to https://github.com/Aamirn1/Rc-Rentals-PK-
+
+---
+Task ID: 19
+Agent: Main (Z.ai Code)
+Task: Logo transparent + larger, rebrand text, move typewriter, fix mobile menu, scroll-glow cards
+
+Work Log:
+1. Logo (transparent + larger):
+   - Used the attached ChatGPT_Image_Aug_1__2026__04_35_53_PM_2-removebg-preview.png (755x330 RGBA, transparent)
+   - Generated public/logo.png (600x262 transparent), favicon.ico (16/32/48 transparent), apple-touch-icon.png (180x180 transparent), favicon.svg, og-image.jpg (1200x630, logo composited on dark navy)
+   - Navbar logo: h-11 sm:h-12 (was w-9 h-9) — significantly larger
+   - Footer logo: h-12 (was w-9 h-9)
+   - Removed all background padding (transparent, object-contain)
+
+2. Brand text rebrand:
+   - Rewrote shimmer-logo.tsx to two-line layout: "Rajpoot Cars" (top) / "Rentals PK" (bottom, smaller, primary-tinted)
+   - Applied everywhere ShimmerLogo is used (navbar, footer, mobile menu header)
+
+3. Hero typewriter moved:
+   - Replaced hero H1 typewriter with static stacked text: "Rent Your" / "Dream" (gold gradient) / "Car"
+   - Moved the Typewriter component to a new dedicated section right below the search/filter bar, as a rotating slogan (h2) with all 4 original phrases
+
+4. Scroll-glow on cards:
+   - Added .scroll-glow + .scroll-glow.in-view CSS (fade-up + glow-pulse animation)
+   - Created ScrollReveal component using IntersectionObserver (respects prefers-reduced-motion)
+   - Wrapped CarCard in <ScrollReveal as="article"> so each card glows + fades up when scrolled into view
+   - Verified: 6 featured cards all get .in-view class when scrolled to
+
+5. Mobile menu fixes:
+   - Removed the duplicate custom X close button (was causing 2 crosses)
+   - Kept only the built-in SheetContent close (top-right X) — verified lucideX count = 1
+   - Moved Login + Sign Up buttons to the bottom of the sheet in a single 2-col row (Login left, Sign Up right) — verified sameRow:true, leftToRight:[Login,Sign Up]
+   - Authed users see profile/admin/logout in the middle instead
+
+6. Committed (2064375) + pushed to GitHub
+
+Stage Summary:
+- Transparent larger logo everywhere; brand text "Rajpoot Cars / Rentals PK"
+- Hero now shows stacked "Rent Your / Dream / Car"; typewriter rotates slogans below the search bar
+- Car cards glow + fade-up on scroll into view (IntersectionObserver)
+- Mobile menu: single X close, Login+Sign Up at bottom in one row
