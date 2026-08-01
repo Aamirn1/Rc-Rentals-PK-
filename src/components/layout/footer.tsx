@@ -27,12 +27,10 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-3">
               <img
                 src="/logo.png"
-                alt="RC Rentals PK logo"
-                width={36}
-                height={36}
-                className="w-9 h-9 rounded-lg object-contain"
+                alt="Rajpoot Cars Rentals PK logo"
+                className="h-12 w-auto object-contain"
               />
-              <ShimmerLogo className="text-lg" />
+              <ShimmerLogo className="text-base" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Pakistan&apos;s trusted car rental service for trips, tours, weddings &amp; events.

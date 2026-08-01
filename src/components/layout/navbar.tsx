@@ -5,7 +5,7 @@ import { useAppStore } from "@/lib/store";
 import { ShimmerLogo } from "@/components/effects/shimmer-logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Car, LogOut, LayoutDashboard, User as UserIcon, X } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, User as UserIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS: { label: string; view: Parameters<typeof useAppStore.getState>["setView"] extends (v: infer V) => void ? V : never }[] = [
@@ -40,15 +40,13 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <button onClick={() => go("home")} className="flex items-center gap-2 group" aria-label="RC Rentals PK home">
+        <button onClick={() => go("home")} className="flex items-center gap-2 group" aria-label="Rajpoot Cars Rentals PK home">
           <img
             src="/logo.png"
-            alt="RC Rentals PK logo"
-            width={36}
-            height={36}
-            className="w-9 h-9 rounded-lg object-contain transition-transform group-hover:scale-110"
+            alt="Rajpoot Cars Rentals PK logo"
+            className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-110"
           />
-          <ShimmerLogo className="text-lg sm:text-xl" />
+          <ShimmerLogo className="text-base sm:text-lg" />
         </button>
 
         {/* Desktop nav */}
@@ -107,14 +105,14 @@ export function Navbar() {
               <Menu className="w-5 h-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] bg-card border-l-border p-0">
-            <div className="flex items-center justify-between p-4 border-b border-border">
+          <SheetContent side="right" className="w-[280px] bg-card border-l-border p-0 flex flex-col">
+            {/* Header: logo only — the built-in SheetContent close (top-right X) handles closing (removed duplicate custom X) */}
+            <div className="flex items-center justify-center py-5 px-4 border-b border-border">
               <ShimmerLogo className="text-base" />
-              <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close menu">
-                <X className="w-4 h-4" />
-              </Button>
             </div>
-            <div className="flex flex-col p-4 gap-1">
+
+            {/* Middle: nav links (and authed actions) */}
+            <div className="flex-1 flex flex-col p-4 gap-1 overflow-y-auto">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.view}
@@ -127,9 +125,9 @@ export function Navbar() {
                   {item.label}
                 </button>
               ))}
-              <div className="h-px bg-border my-2" />
-              {user ? (
+              {user && (
                 <>
+                  <div className="h-px bg-border my-2" />
                   <Button variant="ghost" className="justify-start gap-2" onClick={() => go("profile")}>
                     <UserIcon className="w-4 h-4" /> My Profile
                   </Button>
@@ -142,17 +140,20 @@ export function Navbar() {
                     <LogOut className="w-4 h-4" /> Logout
                   </Button>
                 </>
-              ) : (
-                <>
-                  <Button variant="ghost" className="justify-start" onClick={() => go("login")}>
-                    Login
-                  </Button>
-                  <Button className="justify-start bg-primary text-primary-foreground" onClick={() => go("signup")}>
-                    Sign Up
-                  </Button>
-                </>
               )}
             </div>
+
+            {/* Bottom: Login + Sign Up in one row (Login first, then Sign Up) — only for guests */}
+            {!user && (
+              <div className="p-4 border-t border-border grid grid-cols-2 gap-2">
+                <Button variant="outline" onClick={() => go("login")}>
+                  Login
+                </Button>
+                <Button onClick={() => go("signup")} className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </SheetContent>
         </Sheet>
       </nav>

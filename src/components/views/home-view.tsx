@@ -234,17 +234,10 @@ export function HomeView() {
             >
               <Sparkles className="w-3 h-3" /> Pakistan&apos;s Premium Car Rental
             </Badge>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-white drop-shadow-lg">
-              <span className="block">
-                <Typewriter
-                  phrases={[
-                    "Rent Your Dream Car",
-                    "Drive Anywhere in Pakistan",
-                    "Self-Drive or Chauffeur",
-                    "Book in Minutes",
-                  ]}
-                />
-              </span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.95] mb-6 text-white drop-shadow-lg">
+              <span className="block">Rent Your</span>
+              <span className="block text-gradient-gold">Dream</span>
+              <span className="block">Car</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed mb-8 drop-shadow">
               From economical hatchbacks to luxury sedans and SUVs — RC Rentals PK gives you the
@@ -358,6 +351,25 @@ export function HomeView() {
               </Button>
             </form>
           </Card>
+        </div>
+      </section>
+
+      {/* ===== TYPEWRITER ROTATING SLOGAN (moved below hero) ===== */}
+      <section className="py-10 md:py-14 text-center">
+        <div className="mx-auto max-w-4xl px-4">
+          <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-3">
+            Why choose Rajpoot Cars Rentals PK
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight min-h-[2.5em] flex items-center justify-center">
+            <Typewriter
+              phrases={[
+                "Rent Your Dream Car",
+                "Drive Anywhere in Pakistan",
+                "Self-Drive or Chauffeur",
+                "Book in Minutes",
+              ]}
+            />
+          </h2>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { formatPKR, type VehicleWithImages, toVehicleWithImages, type Vehicle } 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Users, Fuel, Cog, MapPin, Star, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +26,8 @@ export function CarCard({ car, className }: CarCardProps) {
   const img = v.images[0] || "/favicon.svg";
 
   return (
-    <Card className={cn("card-lift overflow-hidden group bg-card border-border flex flex-col", className)}>
+    <ScrollReveal as="article" className={cn("h-full", className)}>
+    <Card className={cn("card-lift overflow-hidden group bg-card border-border flex flex-col h-full", className)}>
       <div className="relative aspect-[16/10] overflow-hidden bg-muted">
         <img
           src={img}
@@ -85,5 +87,6 @@ export function CarCard({ car, className }: CarCardProps) {
         </div>
       </div>
     </Card>
+    </ScrollReveal>
   );
 }
