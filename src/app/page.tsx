@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useAppStore } from "@/lib/store";
 import { Navbar } from "@/components/layout/navbar";
+import { BackButton } from "@/components/layout/back-button";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
@@ -61,6 +62,7 @@ export default function Page() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      <BackButton />
       <main className="flex-1 pt-16">
         {view === "home" && <HomeView />}
         {view === "cars" && <CarsView />}

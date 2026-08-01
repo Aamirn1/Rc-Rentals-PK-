@@ -235,9 +235,9 @@ export function HomeView() {
               <Sparkles className="w-3 h-3" /> Pakistan&apos;s Premium Car Rental
             </Badge>
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.95] mb-6 drop-shadow-lg">
-              <span className="block text-gradient-gold">Rent Your</span>
-              <span className="block text-gradient-gold">Dream</span>
-              <span className="block text-gradient-gold">Car</span>
+              <span className="block shine-text">Rent Your</span>
+              <span className="block shine-text">Dream</span>
+              <span className="block shine-text">Car</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed mb-8 drop-shadow">
               From economical hatchbacks to luxury sedans and SUVs — RC Rentals PK gives you the
