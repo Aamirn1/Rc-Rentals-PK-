@@ -263,7 +263,7 @@ export function HomeView() {
             >
               <Sparkles className="w-3 h-3" /> Pakistan&apos;s Premium Car Rental
             </Badge>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.95] mb-6 drop-shadow-lg">
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] mb-6 drop-shadow-lg">
               <span className="block shine-text">Rent Your</span>
               <span className="block shine-text">Dream</span>
               <span className="block shine-text">Car</span>
