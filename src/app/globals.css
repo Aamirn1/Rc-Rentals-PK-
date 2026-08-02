@@ -291,9 +291,9 @@
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Stylish display font for hero headline (Outfit) */
+/* Stylish display font for hero headline (Playfair Display) */
 .font-display {
-  font-family: var(--font-outfit), system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }
